@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-   static private func createLabel() -> UILabel {
+   static func createLabel() -> UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.layer.cornerRadius = 20
@@ -71,14 +71,14 @@ extension ViewController: ViewCodeConfiguration {
         label.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16).isActive = true
         label.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16).isActive = true
         label.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        label.font = UIFont(name: "KohinoorDevanagari-Semibold", size: 40.0)
+        
         
         //Description
         descriptionLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16).isActive = true
         descriptionLabel.heightAnchor.constraint(equalToConstant: 130).isActive = true
-        descriptionLabel.font = UIFont(name: "KohinoorDevanagari-Semibold", size: 30.0)
+        
         
         //ResultadoImagem
         resultadoImagem.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40).isActive = true
@@ -96,6 +96,7 @@ extension ViewController: ViewCodeConfiguration {
         label.layer.masksToBounds = true
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont(name: "KohinoorDevanagari-Semibold", size: 40.0)
         
         // Description
         descriptionLabel.text = self.character.description == "" ? "This character doesnt have a description" : self.character.description
@@ -104,6 +105,7 @@ extension ViewController: ViewCodeConfiguration {
         descriptionLabel.layer.masksToBounds = true
         descriptionLabel.numberOfLines = 6
         descriptionLabel.adjustsFontSizeToFitWidth = true
+        descriptionLabel.font = UIFont(name: "KohinoorDevanagari-Semibold", size: 30.0)
         
         // Image
         

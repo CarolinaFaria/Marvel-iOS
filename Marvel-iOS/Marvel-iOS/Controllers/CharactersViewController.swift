@@ -21,7 +21,7 @@ class CharactersViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         
         let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = UIColor(red: 83/255.0, green: 177.0/255.0, blue: 192/255.0, alpha: 1)
+        view.backgroundColor = UIColor(named: "main")
         self.view = view
         applyViewCode()
         
@@ -38,26 +38,36 @@ class CharactersViewController: UIViewController, UITableViewDelegate, UITableVi
             print(error)
         }
     }
+    
+    
     // MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CharacterTableViewCell
         let character = characters[indexPath.row]
         let image = UIImage()
+
         cell.imageFoto.image = image.getImageData(character)
         cell.labelName.text = character.name
-        cell.backgroundColor = .white
         
         return cell
     }
     
+
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return characters.count
     }
-
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return self.view.frame.height*0.2
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let viewController = ViewController()
