@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Request: Codable{
-    var data: Dados
+class MarvelRequest: Decodable {
+    var data: CharactersInfo
 }
 

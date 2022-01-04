@@ -7,11 +7,11 @@
 
 import Foundation
 
-class Dados: Codable{
+class CharactersInfo: Decodable {
     var offset: Int = 0
     var limit : Int = 0
     var total: Int = 0
     var count: Int = 0
-    var results: [Result]
+    var results: [Character]
     
 }

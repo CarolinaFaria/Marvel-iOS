@@ -7,9 +7,12 @@
 
 import UIKit
 
-class CharactersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CharactersListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-   var characters = [Result]()
+    var characters = [Character]()
+    var imageConstrutor = ImageConstructor()
+    var networkRequest = NetworkRequest()
+    var loadingAlert = LoadingAlert()
     
     private var myTableView: UITableView = {
         let tableView = UITableView()
@@ -29,31 +32,34 @@ class CharactersViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        REST.loadCharacters{ (characters) in
-            self.characters = characters!
+        let loading = self.loadingAlert.startLoader()
+        present(loading, animated: true, completion: nil)
+        networkRequest.fetchGenericData { (marvelInfo: MarvelRequest) in
+            self.characters = marvelInfo.data.results
             DispatchQueue.main.async {
                 self.myTableView.reloadData()
+                self.loadingAlert.stopLoader(loading)
             }
-        } onError: { (error) in
-            print(error)
+        } onError: { (genericError: GenericError) in
+            print(genericError)
         }
     }
-    
     
     // MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CharacterTableViewCell
         let character = characters[indexPath.row]
-        let image = UIImage()
 
-        cell.imageFoto.image = image.getImageData(character)
+        cell.imageFoto.image = imageConstrutor.getImageData(character)
         cell.labelName.text = character.name
         
+        let indicator = UIImage(named: "chevron.png")!.withTintColor(.white)
+        cell.accessoryType = .disclosureIndicator
+        cell.accessoryView = UIImageView(image: indicator)
+ 
         return cell
     }
-    
-
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return characters.count
@@ -63,21 +69,19 @@ class CharactersViewController: UIViewController, UITableViewDelegate, UITableVi
         return 1
     }
     
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return self.view.frame.height*0.2
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewController = ViewController()
+        let viewController = CharacterViewController()
         let character = characters[indexPath.row]
         viewController.character = character
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
-extension CharactersViewController: ViewCodeConfiguration {
+extension CharactersListViewController: ViewCodeConfiguration {
    
     func buildHierarchy() {
         view.addSubview(myTableView)
@@ -101,5 +105,6 @@ extension CharactersViewController: ViewCodeConfiguration {
        
     }
 }
+
 
 

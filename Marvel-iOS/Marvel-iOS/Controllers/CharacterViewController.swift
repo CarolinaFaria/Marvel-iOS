@@ -7,10 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CharacterViewController: UIViewController {
     
     private var label: UILabel
     private var descriptionLabel: UILabel
+    var imageConstrutor = ImageConstructor()
+    var loadingAlert = LoadingAlert()
     
     private var resultadoImagem: UIImageView = {
         let view = UIImageView(frame: .zero)
@@ -18,11 +20,11 @@ class ViewController: UIViewController {
         return view
     }()
     
-    var character: Result!
+    var character: Character!
     
     internal required init() {
-        label = ViewController.createLabel()
-        descriptionLabel = ViewController.createLabel()
+        label = CharacterViewController.createLabel()
+        descriptionLabel = CharacterViewController.createLabel()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -41,23 +43,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         let view = UIView(frame: UIScreen.main.bounds)
-        //view.backgroundColor = UIColor(red: 83/255.0, green: 177.0/255.0, blue: 192/255.0, alpha: 1)
         view.backgroundColor = UIColor(named: "main")
         self.view = view
-        
-        let image = UIImage()
-        resultadoImagem.image = image.getImageData(self.character)
-        
+        resultadoImagem.image = imageConstrutor.getImageData(self.character)
         applyViewCode()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         applyViewCode()
     }
 }
 
-extension ViewController: ViewCodeConfiguration {
+extension CharacterViewController: ViewCodeConfiguration {
    
     func buildHierarchy() {
         view.addSubview(label)

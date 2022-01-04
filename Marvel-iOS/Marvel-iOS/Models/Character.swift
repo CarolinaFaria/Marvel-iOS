@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Result: Codable {
+class Character: Decodable {
     
     var id: Int?
     var name: String = ""
@@ -17,14 +17,3 @@ class Result: Codable {
 }
 
 
-
-//class Comics: Codable {
-//    var available: Int = 0
-//    var itens: [Item] = []
-//}
-//
-//class Item: Codable {
-//
-//    var resourceURI: String = ""
-//    var name: String = ""
-//}

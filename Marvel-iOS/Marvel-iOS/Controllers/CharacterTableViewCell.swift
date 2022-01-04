@@ -26,6 +26,7 @@ class CharacterTableViewCell: UITableViewCell {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
         
             //        // add shadow on cell
+            tintColor = .white
             backgroundColor = UIColor(named: "main")
             layer.masksToBounds = false
 
@@ -42,7 +43,7 @@ class CharacterTableViewCell: UITableViewCell {
             let deviceWidth = screenSize.width
             let deviceHeight = screenSize.height*0.2
          
-            self.imageFoto = UIImageView(frame: CGRect(x: deviceWidth*0.45, y: deviceHeight*0.05, width: deviceWidth*0.5, height: deviceHeight*0.8))
+            self.imageFoto = UIImageView(frame: CGRect(x: deviceWidth*0.45, y: deviceHeight*0.05, width: deviceWidth*0.4, height: deviceHeight*0.8))
             self.labelName = UILabel(frame: CGRect(x: deviceWidth*0.05, y: 0, width: deviceWidth*0.35, height: deviceHeight/2))
 
             applyViewCode()

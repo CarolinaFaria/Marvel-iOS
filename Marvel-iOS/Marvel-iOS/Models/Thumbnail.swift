@@ -7,16 +7,10 @@
 
 import Foundation
 
-class Thumbnail: Codable {
+class Thumbnail: Decodable {
     
     var path: String = ""
     var jpg: String = ""
-    
-    var securePath: String{
-        let trimmPath = path.dropFirst(4)
-        let secureURL = "https" + trimmPath
-        return secureURL
-    }
     
     enum CodingKeys: String, CodingKey {
         case path

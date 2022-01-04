@@ -1,26 +1,22 @@
 //
-//  ViewControllerTest.swift
+//  RestTests.swift
 //  Marvel-iOSTests
 //
-//  Created by Carolina de Faria Paulo on 20/12/21.
+//  Created by Carolina de Faria Paulo on 21/12/21.
 //
 
 import XCTest
 
 @testable import Marvel_iOS
 
-class ViewControllerTest: XCTestCase {
-    
-    var sut: CharacterViewController!
-    
+class RestTests: XCTestCase {
+
     override func setUpWithError() throws {
-        super.setUp()
-        sut = CharacterViewController()
+        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
     override func tearDownWithError() throws {
-        sut = nil
-        try super.tearDownWithError()
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testExample() throws {
